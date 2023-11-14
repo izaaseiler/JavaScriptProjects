@@ -1,0 +1,83 @@
+<meta charset="UTF-8">
+
+
+<input/>
+<button>Compare com o meu segredo</button>
+
+<script>
+
+	function sorteia() {
+
+		return Math.round(Math.random() * 10);
+	}
+
+	function sorteiaNumeros (quantidade) {
+
+		var segredo = [];
+
+		var numero = 1;
+
+		while(numero <= quantidade) {
+
+			var numeroAleatorio = sorteia();
+
+			if(numeroAleatorio !== 0) {
+
+			var achou = false;
+
+
+				for(var posicao = 0; posicao < segredo.length; posicao++) {
+
+					if(segredo[posicao] == numeroAleatorio) {
+						achou = true;
+						break;
+					}
+				}
+
+				if(achou == false) {
+					segredo.push(numeroAleatorio);
+					numero++;
+				}
+			}
+		}
+
+		return segredo;
+	}
+
+//A variável input está chamando a Tag input lá do Html para dentro do JS. O nome da variável pode ser qualquer um, porém, a informação "" precisa ser o nome da Tag exatamente como ele aparece no Html.
+	var segredo = sorteiaNumeros(5);
+
+	var input = document.querySelector("input");
+	input.focus();
+	
+	function verifica(){
+
+		var achou = false;
+		//Atentar a como lenght é escrito!!!
+		for(var posicao = 0; posicao < segredo.lenght; posicao++) {
+
+			if(input.value == segredo[posicao]) {
+
+				alert("Você ACERTOU!");
+				achou = true;
+				break;
+			}
+		
+		}
+
+		if(achou == false) {
+
+			alert("Você ERROU!!!!");
+		}
+
+
+		input.value = "";
+		input.focus();
+
+	}
+
+	var button = document.querySelector("button");
+
+	button.onclick = verifica;
+
+</script>
